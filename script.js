@@ -716,7 +716,7 @@ function getDifficulty(){
     if(score < 15){
 
         return {
-            moveSpeed:520,
+            moveSpeed:680,
             size:2.2
         };
 
@@ -724,7 +724,7 @@ function getDifficulty(){
 
     return {
 
-        moveSpeed:500,
+        moveSpeed:650,
 
         size:2
 
