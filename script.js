@@ -724,7 +724,7 @@ function getDifficulty(){
 
     return {
 
-        moveSpeed:360,
+        moveSpeed:500,
 
         size:2
 
