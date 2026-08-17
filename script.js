@@ -460,29 +460,76 @@ addressForm.addEventListener("submit", event => {
 
 let formSubmitted = false;
 
+const GOOGLE_SHEET_URL =
+    "https://script.google.com/macros/s/AKfycbzrwhC2XJJKXDbCdfBBLefl1o9KpCHKaSLsr9pOBFRuR6saN9FwPgWGeKWkXtwPXp5N/exec";
+
+
 function saveAddress(){
 
     if(formSubmitted) return;
 
-    formSubmitted = true;
+    const addressField =
+        document.getElementById("addressField");
 
     const data = {
 
         address:
-            document
-                .getElementById("addressField")
-                .value
-                .trim()
+            addressField.value.trim()
 
     };
 
+
+    if(!data.address){
+
+        alert("Please enter your address.");
+
+        return;
+
+    }
+
+
+    formSubmitted = true;
+
+
     console.log(data);
 
-    /*
-        Firebase save comes later
-    */
 
-    setTimeout(showThankYou, 800);
+    fetch(GOOGLE_SHEET_URL, {
+
+        method:"POST",
+
+        mode:"no-cors",
+
+        headers:{
+            "Content-Type":
+                "text/plain;charset=utf-8"
+        },
+
+        body:JSON.stringify(data)
+
+    })
+    .then(()=>{
+
+        console.log(
+            "Address submitted successfully."
+        );
+
+        setTimeout(
+            showThankYou,
+            800
+        );
+
+    })
+    .catch(error=>{
+
+        console.error(
+            "Address submission failed:",
+            error
+        );
+
+        formSubmitted = false;
+
+    });
 
 }
 
@@ -716,7 +763,7 @@ function getDifficulty(){
     if(score < 15){
 
         return {
-            moveSpeed:680,
+            moveSpeed:520,
             size:2.2
         };
 
@@ -724,7 +771,7 @@ function getDifficulty(){
 
     return {
 
-        moveSpeed:650,
+        moveSpeed:360,
 
         size:2
 
