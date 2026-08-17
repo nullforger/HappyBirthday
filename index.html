@@ -31,6 +31,15 @@
 
      <canvas id="confettiCanvas"></canvas>
 
+     <!-- Sound Control -->
+<button id="soundToggle" class="sound-toggle" aria-label="Toggle music">
+    🔇
+</button>
+
+<audio id="birthdayMusic" loop>
+    <source src="assets/audio/birthday.mp3" type="audio/mpeg">
+</audio>
+
     <!-- Intro Overlay -->
     <section id="introOverlay">
 
@@ -369,7 +378,7 @@ I hope today becomes one of your happiest memories.
                 </article>
 
                 <button class="next-btn"
-                    data-next="cake">
+                    data-next="catchGame">
 
                     Continue
 
@@ -379,11 +388,235 @@ I hope today becomes one of your happiest memories.
 
         </section>
 
+<!-- ===================== -->
+<!-- Catch Me If You Can -->
+<!-- ===================== -->
+
+<section class="scene" id="catchGame">
+
+    <div class="card catch-card">
+
+        <span class="pill">
+            One Tiny Challenge
+        </span>
+
+
+        <p class="catch-intro">
+
+            Okay...before we celebrate,
+
+            <br>
+
+            I have one little challenge for you.
+
+            <br><br>
+
+            Catch the hearts.
+            <br>
+            Avoid the broken ones.
+
+            <br><br>
+
+        </p>
+
+
         <!-- ===================== -->
-        <!-- Address -->
+        <!-- GAME -->
         <!-- ===================== -->
 
-        <section id="address" class="scene">
+        <div id="catchGameWrapper">
+
+            <div class="catch-hud">
+
+                <div class="hud-item">
+
+                    <span class="hud-label">
+                        SCORE
+                    </span>
+
+                    <span id="catchScore">
+                        0
+                    </span>
+
+                </div>
+
+
+                <div class="hud-item">
+
+                    <span class="hud-label">
+                        COMBO
+                    </span>
+
+                    <span id="catchCombo">
+                        x1
+                    </span>
+
+                </div>
+
+
+                <div class="hud-item">
+
+                    <span class="hud-label">
+                        TIME
+                    </span>
+
+                    <span id="catchTimer">
+                        30
+                    </span>
+
+                </div>
+
+
+                <div class="hud-lives">
+
+                    <span id="life1">❤️</span>
+                    <span id="life2">❤️</span>
+                    <span id="life3">❤️</span>
+
+                </div>
+
+            </div>
+
+
+            <div class="catch-progress">
+
+                <div
+                    id="catchProgressBar">
+                </div>
+
+            </div>
+
+
+            <div id="heartArena">
+
+                <div class="arena-particle particle-one">
+                    ✨
+                </div>
+
+                <div class="arena-particle particle-two">
+                    🌸
+                </div>
+
+                <div class="arena-particle particle-three">
+                    ✨
+                </div>
+
+                <button
+                    id="catchHeart"
+                    class="catch-target"
+                    type="button"
+                    aria-label="Catch">
+
+                    💗
+
+                </button>
+
+            </div>
+
+
+            <p class="catch-instruction">
+
+                💗 Catch the hearts
+                &nbsp; • &nbsp;
+                💔 Avoid the broken hearts
+
+            </p>
+
+        </div>
+
+
+        <!-- ===================== -->
+        <!-- GAME COMPLETE -->
+        <!-- ===================== -->
+
+        <div
+            id="catchSuccess"
+            class="catch-result">
+
+            <div class="result-icon">
+                🏆
+            </div>
+
+            <h2>
+                YOU WIN ❤️
+            </h2>
+
+            <p>
+
+                I knew you'd find a way to deal with it like you always do.
+
+                <br><br>
+
+                I never really doubted you in situations like this
+
+                <br><br>
+
+                And you earned it.
+
+                <br>
+
+                <strong>
+                    So, now let's celebrate🎂
+                </strong>
+
+            </p>
+
+            <button
+                class="next-btn"
+                data-next="cake">
+
+                Continue
+
+            </button>
+
+        </div>
+
+
+        <!-- ===================== -->
+        <!-- GAME OVER -->
+        <!-- ===================== -->
+
+        <div
+            id="catchGameOver"
+            class="catch-result">
+
+            <div class="result-icon">
+                😭
+            </div>
+
+            <h2>
+                Okay... that was close.
+            </h2>
+
+            <p>
+
+                The hearts got away this time.
+
+                <br>
+
+                But I know you will be able to do it.
+
+            </p>
+
+            <button
+                id="retryCatchGame"
+                class="next-btn">
+
+                Try Again 💗
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+        <!-- ===================== -->
+<!-- Address -->
+<!-- ===================== -->
+
+<section id="address" class="scene">
 
     <div class="card">
 
@@ -393,38 +626,82 @@ I hope today becomes one of your happiest memories.
 
         <h2>One Last Wish...</h2>
 
-<p>
+        <p class="address-message">
 
-If I could...
-
-I'd honestly hand you a real birthday cake instead of this virtual one.
-
-🎂
-
-Maybe one day I'll get the chance.
-
-Until then...
-
-tell me where I'd have to deliver it someday.
-
-❤️
-
-</p>
-
-<img
+            <img
     src="assets/gifs/flowers.gif"
     class="address-gif"
     alt="Flowers">
 
-        <form id="addressForm">
+        
+        </p>
 
-            <div class="form-group">
+        <h3 class="address-question">
+            Are you still staying at the same place?
+        </h3>
 
-                <textarea
+        <div class="address-choice">
+
+            <button
+                type="button"
+                class="address-option"
+                id="sameAddressBtn">
+
+                Yes, I'm still there ❤️
+
+            </button>
+
+            <button
+                type="button"
+                class="address-option"
+                id="movedAddressBtn">
+
+                No, I moved somewhere else 🏠
+
+            </button>
+
+        </div>
+
+
+        <!-- Same address response -->
+
+        <div id="sameAddressResponse" class="address-response">
+
+            <p>
+                Perfect ❤️
+                <br>
+                I'll keep the address I already have.
+            </p>
+
+            <button
+                type="button"
+                id="confirmSameAddress"
+                class="next-btn">
+
+                That's Right ❤️
+
+            </button>
+
+        </div>
+
+
+        <!-- New address -->
+
+        <div id="newAddressForm" class="address-response">
+
+            <p>
+                Please give your new address.
+            </p>
+
+            <form id="addressForm">
+
+                <div class="form-group">
+
+                    <textarea
 
                     id="addressField"
 
-                    rows="5"
+                    rows="3"
 
                     required
 
@@ -432,17 +709,19 @@ tell me where I'd have to deliver it someday.
 
                 ></textarea>
 
-            </div>
+                </div>
 
-            <button
-                type="submit"
-                class="next-btn">
+                <button
+                    type="submit"
+                    class="next-btn">
 
-                Send ❤️
+                    Send ❤️
 
-            </button>
+                </button>
 
-        </form>
+            </form>
+
+        </div>
 
     </div>
 
@@ -491,3 +770,6 @@ tell me where I'd have to deliver it someday.
 </body>
 
 </html>
+
+
+ 
