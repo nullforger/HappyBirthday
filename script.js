@@ -212,51 +212,51 @@ nextButtons.forEach(button=>{
 const memories = [
 
 {
-    image:"assets/images/polaroids/ocean.jpg",
+    image:"assets/images/polaroids/ocean.webp",
     caption:"Like the ocean, you have so much depth to you. There is always another thought, another idea, another little part of you waiting to be discovered."
 },
 
 {
-    image:"assets/images/polaroids/sunrise.jpg",
+    image:"assets/images/polaroids/sunrise.webp",
     caption:"Just like a beautiful sunrise, you bring a sense of excitement to new beginnings. There is something wonderfully hopeful about the way you look toward whatever comes next."
 },
 
 {
-    image:"assets/images/polaroids/flowers.jpg",
+    image:"assets/images/polaroids/flowers.webp",
     caption:"Like a garden full of flowers, you have so many different sides to you. Sweet one moment, playful the next, wonderfully chaotic sometimes, and somehow every version still feels completely you."
 },
 
 {
-    image:"assets/images/polaroids/stars.jpg",
+    image:"assets/images/polaroids/stars.webp",
     caption:"Just like the stars, you have your own little universe. Your thoughts, your dreams, your interests, your quirks — all those little pieces come together to make you wonderfully unique."
 },
 
 {
-    image:"assets/images/polaroids/rain.jpg",
+    image:"assets/images/polaroids/rain.webp",
     caption:"Like rain falling on a quiet afternoon, you have a way of making moments feel unhurried. There is something lovely about the way your mind wanders, notices little things, and finds meaning in them."
 },
 
 {
-    image:"assets/images/polaroids/mountains.jpg",
+    image:"assets/images/polaroids/mountains.webp",
     caption:"Like the mountains, you carry a strength that doesn't need to announce itself. You keep going, keep growing, and keep finding your way through things that once seemed impossible."
 },
 {
-    image:"assets/images/polaroids/coffee.jpg",
+    image:"assets/images/polaroids/coffee.webp",
     caption:"Like a warm cup of coffee on a sleepy morning, you have a wonderfully comforting side. Your little routines and small habits make even simple moments feel special."
 },
 
 {
-    image:"assets/images/polaroids/books.jpg",
+    image:"assets/images/polaroids/books.webp",
     caption:"Like a really good book, there is always another chapter of you worth discovering. Your stories, thoughts, opinions and wonderfully random details make you endlessly interesting."
 },
 
 {
-    image:"assets/images/polaroids/forest.jpg",
+    image:"assets/images/polaroids/forest.webp",
     caption:"Like a forest full of hidden paths, you have an adventurous side that keeps things interesting. Your curiosity, spontaneity and little spark make every corner worth exploring."
 },
 
 {
-    image:"assets/images/polaroids/moon.jpg",
+    image:"assets/images/polaroids/moon.webp",
     caption:"Like the moon turning an ordinary night into something worth stopping for, you make even the simplest moments feel memorable. Somehow even your ordinary days always have something special about them."
 }
 ];
