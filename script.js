@@ -53,6 +53,98 @@ window.addEventListener("load",()=>{
 
 });
 
+
+/*==========================================================
+                BACKGROUND MUSIC
+==========================================================*/
+
+const soundToggle = document.getElementById("soundToggle");
+const birthdayMusic = document.getElementById("birthdayMusic");
+
+let musicPlaying = false;
+let musicStarted = false;
+
+
+/*==========================================================
+            START MUSIC AFTER FIRST INTERACTION
+==========================================================*/
+
+async function startMusic() {
+
+    if (musicStarted) return;
+
+    try {
+
+        await birthdayMusic.play();
+
+        musicPlaying = true;
+        musicStarted = true;
+
+        soundToggle.textContent = "🔊";
+        soundToggle.classList.add("playing");
+
+        console.log("🎵 Birthday music started");
+
+    } catch (error) {
+
+        console.error("Music failed to play:", error);
+
+    }
+
+}
+
+
+/*==========================================================
+            SOUND BUTTON
+==========================================================*/
+
+soundToggle.addEventListener("click", async (event) => {
+
+    event.stopPropagation();
+
+    if (musicPlaying) {
+
+        birthdayMusic.pause();
+
+        musicPlaying = false;
+
+        soundToggle.textContent = "🔇";
+        soundToggle.classList.remove("playing");
+
+    } else {
+
+        try {
+
+            await birthdayMusic.play();
+
+            musicPlaying = true;
+            musicStarted = true;
+
+            soundToggle.textContent = "🔊";
+            soundToggle.classList.add("playing");
+
+        } catch (error) {
+
+            console.error("Music failed to play:", error);
+
+        }
+
+    }
+
+});
+
+/*==========================================================
+            START MUSIC ON FIRST USER INTERACTION
+==========================================================*/
+
+document.addEventListener("click", () => {
+
+    if (!musicStarted) {
+        startMusic();
+    }
+
+}, { once: true });
+
 /*==========================================================
                 SCENE CHANGE
 ==========================================================*/
@@ -121,54 +213,52 @@ const memories = [
 
 {
     image:"assets/images/polaroids/ocean.jpg",
-    caption:"Your eyes are as deep as the ocean—calm enough to bring peace, yet mysterious enough to keep me lost in them forever."
+    caption:"Like the ocean, you have so much depth to you. There is always another thought, another idea, another little part of you waiting to be discovered."
 },
 
 {
     image:"assets/images/polaroids/sunrise.jpg",
-    caption:"Just like every sunrise, you somehow make ordinary days feel full of hope."
+    caption:"Just like a beautiful sunrise, you bring a sense of excitement to new beginnings. There is something wonderfully hopeful about the way you look toward whatever comes next."
 },
 
 {
     image:"assets/images/polaroids/flowers.jpg",
-    caption:"Some flowers bloom only once a year. Somehow, you bloom every single day."
+    caption:"Like a garden full of flowers, you have so many different sides to you. Sweet one moment, playful the next, wonderfully chaotic sometimes, and somehow every version still feels completely you."
 },
 
 {
     image:"assets/images/polaroids/stars.jpg",
-    caption:"If kindness had a constellation, it would look exactly like you."
+    caption:"Just like the stars, you have your own little universe. Your thoughts, your dreams, your interests, your quirks — all those little pieces come together to make you wonderfully unique."
 },
 
 {
     image:"assets/images/polaroids/rain.jpg",
-    caption:"Even rainy days feel beautiful when I imagine sharing them with you."
+    caption:"Like rain falling on a quiet afternoon, you have a way of making moments feel unhurried. There is something lovely about the way your mind wanders, notices little things, and finds meaning in them."
 },
 
 {
     image:"assets/images/polaroids/mountains.jpg",
-    caption:"Quiet strength has a face, and somehow it reminds me of you."
+    caption:"Like the mountains, you carry a strength that doesn't need to announce itself. You keep going, keep growing, and keep finding your way through things that once seemed impossible."
 },
-
 {
     image:"assets/images/polaroids/coffee.jpg",
-    caption:"You somehow make comfort feel effortless."
+    caption:"Like a warm cup of coffee on a sleepy morning, you have a wonderfully comforting side. Your little routines and small habits make even simple moments feel special."
 },
 
 {
     image:"assets/images/polaroids/books.jpg",
-    caption:"Every page tells a story. Meeting you became one of my favourite chapters."
+    caption:"Like a really good book, there is always another chapter of you worth discovering. Your stories, thoughts, opinions and wonderfully random details make you endlessly interesting."
 },
 
 {
     image:"assets/images/polaroids/forest.jpg",
-    caption:"You bring the same kind of peace that only nature knows how to give."
+    caption:"Like a forest full of hidden paths, you have an adventurous side that keeps things interesting. Your curiosity, spontaneity and little spark make every corner worth exploring."
 },
 
 {
     image:"assets/images/polaroids/moon.jpg",
-    caption:"Some things never stop being beautiful. The moon... and you."
+    caption:"Like the moon turning an ordinary night into something worth stopping for, you make even the simplest moments feel memorable. Somehow even your ordinary days always have something special about them."
 }
-
 ];
 
 let currentMemory = 0;
@@ -208,12 +298,6 @@ function renderPolaroids(){
             <div class="polaroid-caption">
 
                 ${memory.caption}
-
-            </div>
-
-            <div class="polaroid-sign">
-
-                ~ ❤️
 
             </div>
 
@@ -272,99 +356,133 @@ nextPolaroid.addEventListener("click", () => {
 const blowBtn = document.getElementById("blowCandles");
 const partyGif = document.getElementById("partyGif");
 
-blowCandles.addEventListener(
+blowCandles.addEventListener("click", () => {
 
-"click",
+    /* First press: blow out candles */
+    if (!candlesBlown) {
 
-()=>{
+        candlesBlown = true;
 
-if(candlesBlown)return;
+        flames.forEach(flame => {
+            flame.classList.add("out");
+        });
 
-candlesBlown=true;
+        blowCandles.textContent =
+            "🎉 Happy Birthday!";
 
-flames.forEach(flame=>{
+        partyGif.style.display = "block";
 
-flame.classList.add("out");
+        requestAnimationFrame(() => {
+            partyGif.classList.add("show");
+        });
+
+    }
+
+    /* Every press: celebrate again */
+    launchConfetti();
 
 });
 
-blowCandles.textContent=
 
-"🎉 Yay! Happy Birthday!";
-
-launchConfetti();
-
-partyGif.style.display = "block";
-
-    requestAnimationFrame(() => {
-        partyGif.classList.add("show");
-    });
-
-
-}
-
-);
 
 /*==========================================================
-                CONFETTI PLACEHOLDER
+                ADDRESS CONFIRMATION
 ==========================================================*/
 
-function launchConfetti(){
+const sameAddressBtn =
+    document.getElementById("sameAddressBtn");
 
-console.log("Confetti");
+const movedAddressBtn =
+    document.getElementById("movedAddressBtn");
 
-}
+const sameAddressResponse =
+    document.getElementById("sameAddressResponse");
+
+const newAddressForm =
+    document.getElementById("newAddressForm");
+
+const confirmSameAddress =
+    document.getElementById("confirmSameAddress");
+
+// const addressForm =
+//     document.getElementById("addressForm");
+
+
+/* Same address */
+
+sameAddressBtn.addEventListener("click", () => {
+
+    sameAddressResponse.classList.add("show");
+    newAddressForm.classList.remove("show");
+
+    sameAddressBtn.style.display = "none";
+    movedAddressBtn.style.display = "none";
+
+});
+
+
+/* Moved */
+
+movedAddressBtn.addEventListener("click", () => {
+
+    newAddressForm.classList.add("show");
+    sameAddressResponse.classList.remove("show");
+
+    sameAddressBtn.style.display = "none";
+    movedAddressBtn.style.display = "none";
+
+});
+
+
+/* Confirm existing address */
+
+confirmSameAddress.addEventListener("click", () => {
+
+    showThankYou();
+
+});
+
+
+/* Submit new address */
+
+addressForm.addEventListener("submit", event => {
+
+    event.preventDefault();
+
+    saveAddress();
+
+});
+
+
 /*==========================================================
-                ADDRESS FORM
+                SAVE ADDRESS
 ==========================================================*/
 
-addressForm.addEventListener(
-
-"submit",
-
-event=>{
-
-event.preventDefault();
-
-saveAddress();
-
-}
-
-);
-
-/*==========================================================
-                SAVE
-==========================================================*/
+let formSubmitted = false;
 
 function saveAddress(){
 
-const data={
+    if(formSubmitted) return;
 
-name:
+    formSubmitted = true;
 
-document.getElementById("name").value.trim(),
+    const data = {
 
-address:
+        address:
+            document
+                .getElementById("addressField")
+                .value
+                .trim()
 
-document.getElementById("addressField").value.trim(),
+    };
 
-city:
+    console.log(data);
 
-document.getElementById("city").value.trim(),
+    /*
+        Firebase save comes later
+    */
 
-pincode:
-
-document.getElementById("pincode").value.trim()
-
-};
-
-console.log(data);
-
-/*
-Firebase comes later.
-*/
-
-showThankYou();
+    setTimeout(showThankYou, 800);
 
 }
 
@@ -503,6 +621,836 @@ function typeLetter() {
 
 }
 
+
+/*==========================================================
+                CATCH ME IF YOU CAN
+==========================================================*/
+
+const catchHeart =
+    document.getElementById("catchHeart");
+
+const heartArena =
+    document.getElementById("heartArena");
+
+const catchScore =
+    document.getElementById("catchScore");
+
+const catchCombo =
+    document.getElementById("catchCombo");
+
+const catchTimer =
+    document.getElementById("catchTimer");
+
+const catchProgressBar =
+    document.getElementById("catchProgressBar");
+
+const catchGameWrapper =
+    document.getElementById("catchGameWrapper");
+
+const catchSuccess =
+    document.getElementById("catchSuccess");
+
+const catchGameOver =
+    document.getElementById("catchGameOver");
+
+const retryCatchGame =
+    document.getElementById("retryCatchGame");
+
+const life1 =
+    document.getElementById("life1");
+
+const life2 =
+    document.getElementById("life2");
+
+const life3 =
+    document.getElementById("life3");
+
+
+/*==========================================================
+                GAME SETTINGS
+==========================================================*/
+
+const targetScore = 20;
+
+const gameDuration = 30;
+
+let score = 0;
+
+let combo = 0;
+
+let lives = 3;
+
+let timeLeft = gameDuration;
+
+let gameRunning = false;
+
+let gameTimer = null;
+
+let moveTimer = null;
+
+
+/*==========================================================
+                GAME DIFFICULTY
+==========================================================*/
+
+function getDifficulty(){
+
+    if(score < 5){
+
+        return {
+            moveSpeed:900,
+            size:2.6
+        };
+
+    }
+
+    if(score < 10){
+
+        return {
+            moveSpeed:700,
+            size:2.4
+        };
+
+    }
+
+    if(score < 15){
+
+        return {
+            moveSpeed:520,
+            size:2.2
+        };
+
+    }
+
+    return {
+
+        moveSpeed:360,
+
+        size:2
+
+    };
+
+}
+
+
+/*==========================================================
+                RANDOM POSITION
+==========================================================*/
+
+function getRandomPosition(){
+
+    const padding = 45;
+
+    const width =
+        heartArena.clientWidth;
+
+    const height =
+        heartArena.clientHeight;
+
+
+    const x =
+        padding +
+        Math.random() *
+        (width - padding * 2);
+
+
+    const y =
+        padding +
+        Math.random() *
+        (height - padding * 2);
+
+
+    return {
+        x,
+        y
+    };
+
+}
+
+
+/*==========================================================
+                MOVE TARGET
+==========================================================*/
+
+function moveTarget(){
+
+    if(!gameRunning)return;
+
+
+    const position =
+        getRandomPosition();
+
+
+    catchHeart.style.left =
+        position.x + "px";
+
+
+    catchHeart.style.top =
+        position.y + "px";
+
+
+    const difficulty =
+        getDifficulty();
+
+
+    catchHeart.style.fontSize =
+        difficulty.size + "rem";
+
+
+    /* Random target type */
+
+    const random =
+        Math.random();
+
+
+    catchHeart.classList.remove(
+        "bonus",
+        "bad"
+    );
+
+
+    if(
+        score >= 5 &&
+        random < .16
+    ){
+
+        catchHeart.textContent =
+            "💔";
+
+        catchHeart.classList.add(
+            "bad"
+        );
+
+    }
+
+    else if(
+        score >= 8 &&
+        random < .28
+    ){
+
+        catchHeart.textContent =
+            "💖";
+
+        catchHeart.classList.add(
+            "bonus"
+        );
+
+    }
+
+    else{
+
+        catchHeart.textContent =
+            "💗";
+
+    }
+
+
+    clearTimeout(moveTimer);
+
+
+    moveTimer = setTimeout(
+
+        moveTarget,
+
+        difficulty.moveSpeed
+
+    );
+
+}
+
+
+/*==========================================================
+                PARTICLES
+==========================================================*/
+
+function createCatchParticles(
+    x,
+    y,
+    bad=false
+){
+
+    const particles = bad
+
+        ? ["💥","💔","✨"]
+
+        : ["💗","💕","✨","💖"];
+
+
+    for(
+        let i=0;
+        i<6;
+        i++
+    ){
+
+        const particle =
+            document.createElement("span");
+
+
+        particle.className =
+            "catch-particle";
+
+
+        particle.textContent =
+
+            particles[
+                Math.floor(
+                    Math.random() *
+                    particles.length
+                )
+            ];
+
+
+        particle.style.left =
+            x + "px";
+
+
+        particle.style.top =
+            y + "px";
+
+
+        particle.style.setProperty(
+
+            "--particle-x",
+
+            (
+                (Math.random()-.5) *
+                100
+            ) + "px"
+
+        );
+
+
+        particle.style.setProperty(
+
+            "--particle-y",
+
+            (
+                (Math.random()-.5) *
+                100
+            ) + "px"
+
+        );
+
+
+        heartArena.appendChild(
+            particle
+        );
+
+
+        setTimeout(()=>{
+
+            particle.remove();
+
+        },700);
+
+    }
+
+}
+
+
+/*==========================================================
+                SCORE POPUP
+==========================================================*/
+
+function createScorePopup(
+    x,
+    y,
+    text
+){
+
+    const popup =
+        document.createElement("span");
+
+
+    popup.className =
+        "score-popup";
+
+
+    popup.textContent =
+        text;
+
+
+    popup.style.left =
+        x + "px";
+
+
+    popup.style.top =
+        y + "px";
+
+
+    heartArena.appendChild(
+        popup
+    );
+
+
+    setTimeout(()=>{
+
+        popup.remove();
+
+    },700);
+
+}
+
+
+/*==========================================================
+                UPDATE LIVES
+==========================================================*/
+
+function updateLives(){
+
+    life1.textContent =
+        lives >= 1 ? "❤️" : "🖤";
+
+    life2.textContent =
+        lives >= 2 ? "❤️" : "🖤";
+
+    life3.textContent =
+        lives >= 3 ? "❤️" : "🖤";
+
+}
+
+
+/*==========================================================
+                CATCH TARGET
+==========================================================*/
+
+catchHeart.addEventListener(
+    "click",
+    event => {
+
+        if(!gameRunning)return;
+
+
+        const rect =
+            catchHeart.getBoundingClientRect();
+
+
+        const arenaRect =
+            heartArena.getBoundingClientRect();
+
+
+        const x =
+            rect.left -
+            arenaRect.left +
+            rect.width / 2;
+
+
+        const y =
+            rect.top -
+            arenaRect.top +
+            rect.height / 2;
+
+
+        const isBad =
+            catchHeart.classList.contains(
+                "bad"
+            );
+
+
+        const isBonus =
+            catchHeart.classList.contains(
+                "bonus"
+            );
+
+
+        /*==================================================
+                    BROKEN HEART
+        ==================================================*/
+
+        if(isBad){
+
+            lives--;
+
+            combo = 0;
+
+
+            createCatchParticles(
+                x,
+                y,
+                true
+            );
+
+
+            createScorePopup(
+                x,
+                y,
+                "-1 ❤️"
+            );
+
+
+            updateLives();
+
+
+            catchHeart.classList.add(
+                "caught"
+            );
+
+
+            if(lives <= 0){
+
+                setTimeout(
+                    endGame,
+                    400
+                );
+
+                return;
+
+            }
+
+
+            setTimeout(()=>{
+
+                catchHeart.classList.remove(
+                    "caught"
+                );
+
+                moveTarget();
+
+            },250);
+
+
+            return;
+
+        }
+
+
+        /*==================================================
+                    GOOD HEART
+        ==================================================*/
+
+        combo++;
+
+
+        let points = 1;
+
+
+        /* Golden heart */
+
+        if(isBonus){
+
+            points = 3;
+
+        }
+
+
+        /* Combo bonus */
+
+        if(combo >= 5){
+
+            points++;
+
+        }
+
+
+        score += points;
+
+
+        if(score > targetScore){
+
+            score = targetScore;
+
+        }
+
+
+        catchScore.textContent =
+            score;
+
+
+        catchCombo.textContent =
+            "x" + Math.min(combo,5);
+
+
+        catchProgressBar.style.width =
+            (
+                score /
+                targetScore *
+                100
+            ) + "%";
+
+
+        createCatchParticles(
+            x,
+            y
+        );
+
+
+        createScorePopup(
+            x,
+            y,
+            "+" + points
+        );
+
+
+        catchHeart.classList.add(
+            "caught"
+        );
+
+
+        /*==================================================
+                    WIN
+        ==================================================*/
+
+        if(score >= targetScore){
+
+            setTimeout(
+                winGame,
+                400
+            );
+
+            return;
+
+        }
+
+
+        /*==================================================
+                    NEXT TARGET
+        ==================================================*/
+
+        setTimeout(()=>{
+
+            catchHeart.classList.remove(
+                "caught"
+            );
+
+            moveTarget();
+
+        },180);
+
+    }
+);
+
+
+/*==========================================================
+                TIMER
+==========================================================*/
+
+function updateTimer(){
+
+    if(!gameRunning)return;
+
+
+    timeLeft--;
+
+
+    catchTimer.textContent =
+        timeLeft;
+
+
+    if(timeLeft <= 0){
+
+        endGame();
+
+    }
+
+}
+
+
+/*==========================================================
+                START GAME
+==========================================================*/
+
+function startCatchGame(){
+
+    clearInterval(gameTimer);
+
+    clearTimeout(moveTimer);
+
+
+    score = 0;
+
+    combo = 0;
+
+    lives = 3;
+
+    timeLeft =
+        gameDuration;
+
+
+    gameRunning = true;
+
+
+    catchScore.textContent =
+        "0";
+
+
+    catchCombo.textContent =
+        "x1";
+
+
+    catchTimer.textContent =
+        gameDuration;
+
+
+    catchProgressBar.style.width =
+        "0%";
+
+
+    updateLives();
+
+
+    catchGameWrapper.style.display =
+        "block";
+
+
+    catchSuccess.classList.remove(
+        "show"
+    );
+
+
+    catchGameOver.classList.remove(
+        "show"
+    );
+
+
+    catchHeart.style.display =
+        "flex";
+
+
+    catchHeart.classList.remove(
+        "caught"
+    );
+
+
+    moveTarget();
+
+
+    gameTimer = setInterval(
+
+        updateTimer,
+
+        1000
+
+    );
+
+}
+
+
+/*==========================================================
+                WIN GAME
+==========================================================*/
+
+function winGame(){
+
+    if(!gameRunning)return;
+
+
+    gameRunning = false;
+
+
+    clearInterval(gameTimer);
+
+    clearTimeout(moveTimer);
+
+
+    /*
+        The game disappears completely.
+        The winning message takes its place.
+    */
+
+    catchGameWrapper.style.display =
+        "none";
+
+
+    catchGameOver.classList.remove(
+        "show"
+    );
+
+
+    catchSuccess.classList.add(
+        "show"
+    );
+
+}
+
+
+/*==========================================================
+                GAME OVER
+==========================================================*/
+
+function endGame(){
+
+    if(!gameRunning)return;
+
+
+    gameRunning = false;
+
+
+    clearInterval(gameTimer);
+
+    clearTimeout(moveTimer);
+
+
+    catchGameWrapper.style.display =
+        "none";
+
+
+    catchSuccess.classList.remove(
+        "show"
+    );
+
+
+    catchGameOver.classList.add(
+        "show"
+    );
+
+}
+
+
+/*==========================================================
+                RETRY
+==========================================================*/
+
+retryCatchGame.addEventListener(
+    "click",
+    () => {
+
+        startCatchGame();
+
+    }
+);
+
+
+/*==========================================================
+                RESET WHEN ENTERING SCENE
+==========================================================*/
+
+function resetCatchGame(){
+
+    clearInterval(gameTimer);
+
+    clearTimeout(moveTimer);
+
+
+    gameRunning = false;
+
+
+    catchGameWrapper.style.display =
+        "block";
+
+
+    catchSuccess.classList.remove(
+        "show"
+    );
+
+
+    catchGameOver.classList.remove(
+        "show"
+    );
+
+
+    catchHeart.classList.remove(
+        "caught"
+    );
+
+
+    catchHeart.style.display =
+        "flex";
+
+
+    startCatchGame();
+
+}
+
 /*==========================================================
                 SCENE OBSERVER
 ==========================================================*/
@@ -520,6 +1468,12 @@ function handleSceneEvents(sceneId){
         case "letter":
 
             typeLetter();
+
+            break;
+
+        case "catchGame":
+
+            resetCatchGame();
 
             break;
 
@@ -775,35 +1729,3 @@ document.addEventListener("keydown",event=>{
 
 });
 
-/*==========================================================
-            PREVENT DOUBLE SUBMIT
-==========================================================*/
-
-let formSubmitted=false;
-
-function saveAddress(){
-
-    if(formSubmitted) return;
-
-    formSubmitted=true;
-
-    const data = {
-
-    address:
-
-    document
-        .getElementById("addressField")
-        .value
-        .trim()
-
-};
-
-    console.log(data);
-
-    /*
-        Firebase save comes in Part 3
-    */
-
-    setTimeout(showThankYou,800);
-
-}
