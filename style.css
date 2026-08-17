@@ -227,6 +227,85 @@ DECORATIONS
 }
 
 /*==============================================================
+SOUND TOGGLE
+==============================================================*/
+
+.sound-toggle{
+
+    position:fixed;
+
+    top:20px;
+    right:20px;
+
+    width:48px;
+    height:48px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.78);
+
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+
+    border:1px solid rgba(255,255,255,.65);
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.10);
+
+    font-size:1.25rem;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    z-index:100000;
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease,
+        background .3s ease;
+}
+
+.sound-toggle:hover{
+
+    transform:scale(1.08);
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.14);
+
+}
+
+.sound-toggle:active{
+
+    transform:scale(.94);
+
+}
+
+.sound-toggle.playing{
+
+    box-shadow:
+        0 0 0 5px rgba(220,204,251,.25),
+        0 10px 25px rgba(0,0,0,.10);
+
+}
+
+@media(max-width:480px){
+
+    .sound-toggle{
+
+        top:14px;
+        right:14px;
+
+        width:44px;
+        height:44px;
+
+        font-size:1.1rem;
+
+    }
+
+}
+
+/*==============================================================
 INTRO OVERLAY
 ==============================================================*/
 
@@ -669,29 +748,18 @@ INDIVIDUAL POLAROID
 IMAGE
 ==============================================================*/
 
-.polaroid-image{
-
-    width:100%;
-
-    height:230px;
-
-    border-radius:2px;
-
-    overflow:hidden;
-
-    background:#eee;
-
+.polaroid-image {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
 }
 
-.polaroid-image img{
-
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-
-    display:block;
-
+.polaroid-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
 }
 
 /*==============================================================
@@ -704,7 +772,8 @@ CAPTION
 
     font-family:"Caveat",cursive;
 
-    font-size:1.28rem;
+    font-size:1.1rem;
+
 
     color:#555;
 
@@ -1495,38 +1564,1111 @@ LETTER
 }
 
 #letterPaper{
-
     margin-top:20px;
-
     padding:26px 26px 26px 42px;
-
-    background:white;
-
+    background:
+        linear-gradient(
+            to right,
+            transparent 0,
+            transparent 27px,
+            rgba(255,180,180,.35) 28px,
+            rgba(255,180,180,.35) 30px,
+            transparent 30px
+        ),
+        white;
     border-radius:22px;
-
     text-align:left;
-
     line-height:1.75;
-
     position:relative;
-
     box-shadow:
         inset 0 0 0 1px rgba(0,0,0,.05);
-
     max-height:360px;
-
     overflow-y:auto;
-
     overflow-x:hidden;
-
     scrollbar-width:thin;
+}
+
+
+#letterPaper p{
+
+    margin-bottom:16px;
 
 }
 
-#letterPaper::before{
+.signature{
 
-    content:"";
+    text-align:right;
+
+    margin-top:30px;
+
+    color:#666;
+
+}
+
+#letterPaper::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+#letterPaper::-webkit-scrollbar-track{
+
+    background:transparent;
+
+}
+
+#letterPaper::-webkit-scrollbar-thumb{
+
+    background:rgba(220,204,251,.9);
+
+    border-radius:999px;
+
+}
+
+#letterPaper::-webkit-scrollbar-thumb:hover{
+
+    background:#c8b4f8;
+
+}
+
+/*==============================================================
+ADDRESS
+==============================================================*/
+
+#address p{
+
+    margin-top:14px;
+
+    margin-bottom:25px;
+
+}
+
+#address button{
+
+    margin-top:8px;
+
+}
+
+.address-gif{
+
+    width:110px;
+
+    display:block;
+
+    margin:15px auto;
+
+}
+
+/*==============================================================
+ADDRESS CONFIRMATION
+==============================================================*/
+
+.address-message{
+    margin-top:14px;
+    margin-bottom:25px;
+}
+
+.address-question{
+    margin-top:25px;
+    font-size:1.25rem;
+    color:#555;
+}
+
+.address-choice{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    margin-top:22px;
+}
+
+.address-option{
+    width:100%;
+    min-height:54px;
+    padding:14px 20px;
+
+    border-radius:18px;
+
+    background:rgba(220,204,251,.55);
+
+    color:#444;
+
+    font-family:Poppins,sans-serif;
+    font-size:1rem;
+    font-weight:600;
+
+    box-shadow:0 8px 18px rgba(220,204,251,.2);
+
+    transition:.3s;
+}
+
+.address-option:hover{
+    transform:translateY(-2px);
+    background:rgba(220,204,251,.75);
+}
+
+.address-option:active{
+    transform:scale(.97);
+}
+
+.address-response{
+    display:none;
+    margin-top:25px;
+}
+
+.address-response.show{
+    display:block;
+}
+
+.address-response p{
+    margin-bottom:18px;
+}
+
+#newAddressForm form{
+    margin-top:20px;
+}
+
+/*==============================================================
+GOODBYE
+==============================================================*/
+
+#goodbye .card{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+#goodbye h2{
+
+    margin-bottom:20px;
+
+}
+
+#goodbye h3{
+
+    margin-top:0px;
+
+    color:#555;
+
+}
+
+.thankyou-gif{
+
+    width:80px;
+
+    display:block;
+
+    margin:20px auto;
+
+}
+
+/*==============================================================
+BACKGROUND PARTICLES
+==============================================================*/
+
+.star{
 
     position:absolute;
 
-   
+    opacity:.18;
+
+    animation:starFloat linear infinite;
+
+}
+
+.heart{
+
+    position:absolute;
+
+    opacity:.15;
+
+    animation:heartFloat linear infinite;
+
+}
+
+.flower{
+
+    position:absolute;
+
+    opacity:.15;
+
+    animation:flowerFloat linear infinite;
+
+}
+
+/*==============================================================
+SCENE TRANSITIONS
+==============================================================*/
+
+.scene.enter{
+
+    animation:sceneEnter .75s forwards;
+
+}
+
+.scene.exit{
+
+    animation:sceneExit .45s forwards;
+
+}
+
+@keyframes sceneEnter{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+        translateY(40px)
+        scale(.98);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:none;
+
+    }
+
+}
+
+@keyframes sceneExit{
+
+    from{
+
+        opacity:1;
+
+    }
+
+    to{
+
+        opacity:0;
+
+        transform:
+
+        translateY(-25px);
+
+    }
+
+}
+
+/*==============================================================
+BACKGROUND ANIMATIONS
+==============================================================*/
+
+@keyframes cakeFloat{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-8px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
+
+@keyframes starFloat{
+
+    from{
+
+        transform:
+
+        translateY(120vh)
+        rotate(0deg);
+
+    }
+
+    to{
+
+        transform:
+
+        translateY(-20vh)
+        rotate(360deg);
+
+    }
+
+}
+
+@keyframes heartFloat{
+
+    from{
+
+        transform:
+
+        translateY(120vh)
+        translateX(0);
+
+    }
+
+    50%{
+
+        transform:
+
+        translateY(40vh)
+        translateX(18px);
+
+    }
+
+    to{
+
+        transform:
+
+        translateY(-20vh)
+        translateX(-18px);
+
+    }
+
+}
+
+@keyframes flowerFloat{
+
+    from{
+
+        transform:
+
+        translateY(120vh)
+        rotate(0deg);
+
+    }
+
+    to{
+
+        transform:
+
+        translateY(-20vh)
+        rotate(-240deg);
+
+    }
+
+}
+
+/*==============================================================
+HOVER (DESKTOP ONLY)
+==============================================================*/
+
+@media (hover:hover){
+
+.next-btn:hover{
+
+    transform:
+
+    translateY(-3px)
+    scale(1.02);
+
+}
+
+.card:hover{
+
+    transform:
+
+    translateY(-5px);
+
+}
+
+}
+
+/*==============================================================
+TABLET
+==============================================================*/
+
+@media(min-width:768px){
+
+#letterPaper{
+
+    padding:42px;
+
+}
+
+#affirmationText{
+
+    font-size:1.35rem;
+
+}
+
+}
+
+/*==============================================================
+DESKTOP
+==============================================================*/
+
+@media(min-width:1100px){
+
+.card{
+
+    max-width:720px;
+
+}
+
+h1{
+
+    font-size:4.6rem;
+
+}
+
+}
+
+
+/*==============================================================
+                CATCH ME IF YOU CAN
+==============================================================*/
+
+.catch-card{
+    overflow:visible;
+}
+
+.catch-intro{
+    margin-top:14px;
+    line-height:1.7;
+}
+
+
+/*==============================================================
+                HUD
+==============================================================*/
+
+.catch-hud{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:9px;
+
+    margin-top:20px;
+
+}
+
+.hud-item{
+
+    min-width:68px;
+
+    padding:7px 11px;
+
+    border-radius:14px;
+
+    background:rgba(255,255,255,.65);
+
+    border:1px solid rgba(255,255,255,.8);
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,.04);
+
+}
+
+.hud-label{
+
+    display:block;
+
+    font-size:.58rem;
+
+    letter-spacing:1px;
+
+    opacity:.55;
+
+    margin-bottom:2px;
+
+}
+
+.hud-item > span:last-child{
+
+    font-weight:700;
+
+    font-size:.95rem;
+
+}
+
+.hud-lives{
+
+    padding:7px 10px;
+
+    border-radius:14px;
+
+    background:rgba(255,255,255,.65);
+
+    border:1px solid rgba(255,255,255,.8);
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,.04);
+
+    letter-spacing:2px;
+
+}
+
+
+/*==============================================================
+                PROGRESS
+==============================================================*/
+
+.catch-progress{
+
+    width:100%;
+
+    height:7px;
+
+    margin-top:12px;
+
+    margin-bottom:12px;
+
+    border-radius:999px;
+
+    background:rgba(220,204,251,.25);
+
+    overflow:hidden;
+
+}
+
+#catchProgressBar{
+
+    width:0%;
+
+    height:100%;
+
+    border-radius:999px;
+
+    background:#dcbdf2;
+
+    transition:width .25s ease;
+
+}
+
+
+/*==============================================================
+                ARENA
+==============================================================*/
+
+#heartArena{
+
+    position:relative;
+
+    width:100%;
+
+    height:350px;
+
+    border-radius:26px;
+
+    overflow:hidden;
+
+    background:
+
+        radial-gradient(
+            circle at 50% 45%,
+            rgba(255,255,255,.85),
+            rgba(255,235,247,.42)
+        );
+
+    border:1px solid rgba(255,255,255,.8);
+
+    box-shadow:
+
+        inset 0 0 40px
+        rgba(255,255,255,.55),
+
+        0 10px 30px
+        rgba(0,0,0,.05);
+
+    touch-action:manipulation;
+
+}
+
+
+/*==============================================================
+                ARENA DECORATIONS
+==============================================================*/
+
+.arena-particle{
+
+    position:absolute;
+
+    opacity:.35;
+
+    pointer-events:none;
+
+    user-select:none;
+
+}
+
+.particle-one{
+
+    top:18%;
+
+    left:15%;
+
+    animation:
+        arenaFloatOne 4s ease-in-out infinite;
+
+}
+
+.particle-two{
+
+    bottom:18%;
+
+    right:14%;
+
+    animation:
+        arenaFloatTwo 5s ease-in-out infinite;
+
+}
+
+.particle-three{
+
+    top:30%;
+
+    right:20%;
+
+    animation:
+        arenaFloatOne 6s ease-in-out infinite reverse;
+
+}
+
+@keyframes arenaFloatOne{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-12px);
+    }
+
+}
+
+@keyframes arenaFloatTwo{
+
+    0%,100%{
+        transform:translate(0,0);
+    }
+
+    50%{
+        transform:translate(-8px,-10px);
+    }
+
+}
+
+
+/*==============================================================
+                TARGET
+==============================================================*/
+
+.catch-target{
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    width:68px;
+
+    height:68px;
+
+    padding:0;
+
+    border:0;
+
+    background:transparent;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:2.5rem;
+
+    cursor:pointer;
+
+    z-index:10;
+
+    transform:
+        translate(-50%,-50%);
+
+    transition:
+
+        left .38s
+        cubic-bezier(.2,.8,.25,1),
+
+        top .38s
+        cubic-bezier(.2,.8,.25,1),
+
+        transform .16s ease,
+
+        opacity .2s ease;
+
+    filter:
+
+        drop-shadow(
+            0 7px 10px
+            rgba(220,100,150,.2)
+        );
+
+}
+
+.catch-target:hover{
+
+    transform:
+        translate(-50%,-50%)
+        scale(1.16);
+
+}
+
+.catch-target:active{
+
+    transform:
+        translate(-50%,-50%)
+        scale(.78);
+
+}
+
+.catch-target.caught{
+
+    opacity:0;
+
+    transform:
+        translate(-50%,-50%)
+        scale(1.8);
+
+}
+
+
+/*==============================================================
+                GOLDEN HEART
+==============================================================*/
+
+.catch-target.bonus{
+
+    filter:
+
+        drop-shadow(
+            0 0 10px
+            rgba(255,210,80,.65)
+        );
+
+    animation:
+        bonusPulse .7s ease-in-out infinite;
+
+}
+
+@keyframes bonusPulse{
+
+    0%,100%{
+        transform:
+            translate(-50%,-50%)
+            scale(1);
+    }
+
+    50%{
+        transform:
+            translate(-50%,-50%)
+            scale(1.15);
+    }
+
+}
+
+
+/*==============================================================
+                BAD HEART
+==============================================================*/
+
+.catch-target.bad{
+
+    filter:
+
+        drop-shadow(
+            0 7px 10px
+            rgba(150,80,100,.18)
+        );
+
+}
+
+
+/*==============================================================
+                INSTRUCTION
+==============================================================*/
+
+.catch-instruction{
+
+    margin-top:10px;
+
+    font-size:.8rem;
+
+    opacity:.65;
+
+}
+
+
+/*==============================================================
+                PARTICLES
+==============================================================*/
+
+.catch-particle{
+
+    position:absolute;
+
+    pointer-events:none;
+
+    z-index:20;
+
+    font-size:1rem;
+
+    animation:
+        catchParticle .65s ease-out forwards;
+
+}
+
+@keyframes catchParticle{
+
+    0%{
+
+        opacity:1;
+
+        transform:
+            translate(0,0)
+            scale(.6);
+
+    }
+
+    100%{
+
+        opacity:0;
+
+        transform:
+
+            translate(
+                var(--particle-x),
+                var(--particle-y)
+            )
+
+            scale(1.2);
+
+    }
+
+}
+
+
+/*==============================================================
+                SCORE POPUP
+==============================================================*/
+
+.score-popup{
+
+    position:absolute;
+
+    pointer-events:none;
+
+    z-index:25;
+
+    font-weight:800;
+
+    font-size:1.15rem;
+
+    color:#c77d9a;
+
+    animation:
+        scorePopup .7s ease-out forwards;
+
+}
+
+@keyframes scorePopup{
+
+    0%{
+
+        opacity:1;
+
+        transform:
+            translate(-50%,0)
+            scale(.8);
+
+    }
+
+    100%{
+
+        opacity:0;
+
+        transform:
+            translate(-50%,-45px)
+            scale(1.1);
+
+    }
+
+}
+
+
+/*==============================================================
+                RESULT SCREEN
+==============================================================*/
+
+.catch-result{
+
+    display:none;
+
+    min-height:350px;
+
+    margin-top:12px;
+
+    padding:30px 20px;
+
+    border-radius:26px;
+
+    background:rgba(255,255,255,.62);
+
+    border:1px solid rgba(255,255,255,.8);
+
+    box-shadow:
+        0 12px 35px
+        rgba(0,0,0,.06);
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-direction:column;
+
+    animation:
+        resultAppear .7s ease both;
+
+}
+
+.catch-result.show{
+
+    display:flex;
+
+}
+
+.result-icon{
+
+    font-size:3.2rem;
+
+    margin-bottom:10px;
+
+    animation:
+        resultIcon .8s ease both;
+
+}
+
+.catch-result h2{
+
+    margin-bottom:12px;
+
+}
+
+.catch-result p{
+
+    line-height:1.7;
+
+    margin-bottom:18px;
+
+}
+
+@keyframes resultAppear{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            scale(.94)
+            translateY(15px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            scale(1)
+            translateY(0);
+
+    }
+
+}
+
+@keyframes resultIcon{
+
+    0%{
+        opacity:0;
+        transform:scale(.3) rotate(-10deg);
+    }
+
+    60%{
+        transform:scale(1.2) rotate(5deg);
+    }
+
+    100%{
+        opacity:1;
+        transform:scale(1) rotate(0);
+    }
+
+}
+
+
+/*==============================================================
+                MOBILE
+==============================================================*/
+
+@media(max-width:600px){
+
+    #heartArena{
+
+        height:320px;
+
+        border-radius:22px;
+
+    }
+
+    .catch-hud{
+
+        gap:6px;
+
+    }
+
+    .hud-item{
+
+        min-width:61px;
+
+        padding:6px 8px;
+
+    }
+
+    .hud-lives{
+
+        padding:6px 7px;
+
+        letter-spacing:1px;
+
+    }
+
+    .catch-target{
+
+        width:70px;
+
+        height:70px;
+
+        font-size:2.55rem;
+
+    }
+
+}
