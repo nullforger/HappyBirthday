@@ -213,27 +213,27 @@ const memories = [
 
 {
     image:"assets/images/polaroids/ocean.webp",
-    caption:"Like the ocean, you have so much depth to you. There is always another thought, another idea, another little part of you waiting to be discovered."
+    caption:"Those eyes have the depth of the ocean, beautiful on the surface, but somehow even more captivating the longer you look."
 },
 
 {
     image:"assets/images/polaroids/sunrise.webp",
-    caption:"Just like a beautiful sunrise, you bring a sense of excitement to new beginnings. There is something wonderfully hopeful about the way you look toward whatever comes next."
+    caption:"A beautiful sunrise has nothing on that smile of yours. There's a warmth in it that can make even an ordinary moment feel a little brighter."
 },
 
 {
     image:"assets/images/polaroids/flowers.webp",
-    caption:"Like a garden full of flowers, you have so many different sides to you. Sweet one moment, playful the next, wonderfully chaotic sometimes, and somehow every version still feels completely you."
+    caption:"Among all these flowers, it's still the little things about you that stand out most, your expressions, your laugh and all your wonderfully different sides."
 },
 
 {
     image:"assets/images/polaroids/stars.webp",
-    caption:"Just like the stars, you have your own little universe. Your thoughts, your dreams, your interests, your quirks — all those little pieces come together to make you wonderfully unique."
+    caption:"The night sky has thousands of stars, yet every one is different. You have that same individuality, your own quirks, dreams and way of seeing things."
 },
-
+  
 {
     image:"assets/images/polaroids/rain.webp",
-    caption:"Like rain falling on a quiet afternoon, you have a way of making moments feel unhurried. There is something lovely about the way your mind wanders, notices little things, and finds meaning in them."
+    caption:"Like rain falling on a quiet afternoon, you have a way of making moments feel unhurried. There is something lovely about the way your mind wanders."
 },
 
 {
@@ -257,7 +257,7 @@ const memories = [
 
 {
     image:"assets/images/polaroids/moon.webp",
-    caption:"Like the moon turning an ordinary night into something worth stopping for, you make even the simplest moments feel memorable. Somehow even your ordinary days always have something special about them."
+    caption:"The moon makes an ordinary night look beautiful without even trying. You have that effortless kind of beauty too, especially in the moments when you aren't trying at all."
 }
 ];
 
@@ -763,7 +763,7 @@ function getDifficulty(){
     if(score < 15){
 
         return {
-            moveSpeed:520,
+            moveSpeed:650,
             size:2.2
         };
 
@@ -771,7 +771,7 @@ function getDifficulty(){
 
     return {
 
-        moveSpeed:360,
+        moveSpeed:600,
 
         size:2
 
